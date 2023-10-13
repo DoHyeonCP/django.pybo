@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Question
 from django.utils import timezone
 from .forms import QuestionForm, AnswerForm
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
 # Create your views here.
@@ -9,8 +10,31 @@ def index(request):
     """
     pybo 목록출력
     """
-    question_list = Question.objects.order_by('-create_date')
-    context = {'question_list': question_list}
+    question_list = Question.objects.all().order_by('-create_date')
+    page = request.GET.get('page')
+    paginator = Paginator(question_list, 10)
+    
+    try:
+        page_obj = paginator.page(page)
+    except PageNotAnInteger:
+        page = 1
+        page_obj = paginator.page(page)
+    except EmptyPage:
+        page_obj = paginator.page(paginator.num_pages)
+        
+    leftIndex = (int(page) - 2)
+    if leftIndex < 1:
+        leftIndex = 1
+        
+    rightIndex = (int(page) + 2)
+    
+    if rightIndex > paginator.num_pages:
+        rightIndex = paginator.num_pages
+        
+    custom_range = range(leftIndex, rightIndex + 1)
+        
+    
+    context = {'question_list': question_list, 'page_obj': page_obj, 'paginator': paginator, 'custom_range': custom_range}
     return render(request, 'pybo/question_list.html', context)
 
 def detail(request, question_id):
