@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pybo.apps.PyboConfig',
     'accounts.apps.AccountsConfig',
+
 ]
 
 MIDDLEWARE = [

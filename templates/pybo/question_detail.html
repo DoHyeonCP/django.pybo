@@ -1,30 +1,78 @@
 {% extends 'base.html' %}
+{% load pybo_filter %}
 {% block content %}
 <div class = "container my-3">
-    <h2 class = "border-bottom py-2">{{ question.subject }}</h2>
+    {% if messages %}
+    <div class = "alert alert-danger my-3" role="alert">
+    {% for messages in messages %}
+        <strong>{{messages.tags}}</strong>
+        <ul><li>{{ messages.messages }}</li></ul>
+    {% endfor %}
+    </div>
+    {% endif %}
+
+    <h2 class = "border-bottom py-2">{{ question.subject|mark }}</h2>
     <div class = "card my-3">
         <div class = "card-body">
-            <div calss = "card-text" style = "white-space: pre-line;">
-            {{ question.content}}
+            <div class="d-flex justify-content-between">
+                <div calss = "card-text">
+                {{ question.content|mark}}
+                </div>
+                <div class = "badge bg-light text-dark p-2 text-start">
+                    <div class="mb-2">질문: {{ question.author.username }}</div>
+                    <br>
+                    {% if question.modify_date %}
+                        <div>수정: {{ question.modify_date }}</div>
+                    {% endif %}
+                    <br>
+                    <div>개시: {{ question.create_date}}</div>
+                </div>
             </div>
-            <div class = "badge bg-light text-dark p-2 text-start">
-                <div class="mb-2">{{ question.author.username }}</div>
-                <div>{{ question.create_date}}</div>
-            </div>
+            <div class = "my-3">
+                <a href = "javascript:void(0)" data-uri = "{% url 'pybo:question_vote' question.id %}"
+                    class = "recommend btn btn-sm btn-outline-secondary">추천
+                    <span class="badge rounded-pill bg-success">{{question.voter.count}}</span>
+                </a>
+                {% if request.user == question.author %}
+                <a href = "{% url 'pybo:question_modify' question.id %}"
+                    class = "btn btn-sm btn-outline-secondary">수정</a>
+                <a href = "javascript:void(0)" class = "delete btn btn-sm btn-outline-secondary"
+                data-uri={% url 'pybo:question_delete' question.id %}>삭제</a>
+                {% endif %}
         </div>
     </div>
     <h5 class = "border-bottom my-3 py-2">
         {{question.answer_set.count}}개의 답변이 있습니다.
     </h5>
     {% for answer in question.answer_set.all %}
+    <a id="answer_{{ answer.id }}"></a>
     <div class = "card my-3">
         <div class = "card-body">
-            <div calss = "card-text" style = "white-space: pre-line;">
-                {{ answer.content}}
+            <div class="d-flex justify-content-between">
+                <div calss = "card-text">
+                    {{ answer.content|mark}}
+                </div>
+                <div class="badge bg-light text-dark p-2 text-start">
+                    <div class="mb-2">답변: {{ answer.author.username }}</div>
+                    <br>
+                    {% if answer.modify_date %}
+                        <div>수정: {{ answer.modify_date }}</div>
+                    {% endif %}
+                    <br>
+                    <div>개시: {{ answer.create_date }}</div>
+                </div>
             </div>
-            <div class="badge bg-light text-dark p-2 text-start">
-                <div class="mb-2">{{ answer.author.username }}</div>
-                <div>{{ answer.create_date }}</div>
+            <div class="my-3">
+                <a href="javascript:void(0)" data-uri="{% url 'pybo:answer_vote' answer.id  %}"
+                class="recommend btn btn-sm btn-outline-secondary"> 추천
+                    <span class="badge rounded-pill bg-success">{{answer.voter.count}}</span>
+                </a>
+                {% if request.user == answer.author %}
+                <a href="{% url 'pybo:answer_modify' answer.id  %}" 
+                   class="btn btn-sm btn-outline-secondary">수정</a>
+                <a href="#" class="delete btn btn-sm btn-outline-secondary "
+                    data-uri="{% url 'pybo:answer_delete' answer.id  %}">삭제</a>
+                {% endif %}
             </div>
         </div>
     </div>
