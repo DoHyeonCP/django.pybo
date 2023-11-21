@@ -19,6 +19,7 @@
         <thead>
         <tr calss = "thead-dark">
             <th>번호</th>
+            <th>카테고리</th>
             <th>제목</th>
             <th>글쓴이</th>
             <th>작성일시</th>
@@ -29,6 +30,7 @@
         {% for question in page_obj %}
         <tr class = "text-center">
             <td>{{ forloop.counter}}</td>
+            <td>{{ question.category }}</td>
             <td class = "text-start">
                 <a href = "{% url 'pybo:detail' question.id %}">
                     {{ question.subject|mark}}

@@ -11,6 +11,7 @@ def index(request):
     question_list = Question.objects.all().order_by('-create_date')
     page = request.GET.get('page')
     kw = request.GET.get('kw','')#검색어
+    category = request.GET.get('category', '')
 
     if kw:
         question_list = question_list.filter(
@@ -21,6 +22,9 @@ def index(request):
             Q(answer__author__username__icontains=kw)  # 답변 글쓴이 검색
         ).distinct()
     paginator = Paginator(question_list, 10)
+
+    if category:
+        question_list = question_list.filter(category=category)
     
     
     try:
@@ -43,7 +47,7 @@ def index(request):
     custom_range = range(leftIndex, rightIndex + 1)
         
     
-    context = {'question_list': question_list, 'page_obj': page_obj, 'paginator': paginator, 'custom_range': custom_range, 'kw': kw}
+    context = {'question_list': question_list, 'page_obj': page_obj, 'paginator': paginator, 'custom_range': custom_range, 'kw': kw, 'category': category}
     return render(request, 'pybo/question_list.html', context)
 
 def detail(request, question_id):
