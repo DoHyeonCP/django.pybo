@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pybo.apps.PyboConfig',
     'accounts.apps.AccountsConfig',
+    'django_extensions',
 
 ]
 
@@ -103,6 +104,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+GRAPH_MODELS = {
+    'all_applications': True,
+    'group_models': True,
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
