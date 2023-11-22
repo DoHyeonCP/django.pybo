@@ -4,15 +4,18 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Question(models.Model):
     CATEGORY_CHOICES = [
-        ('FL', "Flask"),
-        ('DJ', "Django"),
-        ('FA', "FastAPI"),
-        ('BD', "Big Data"),
-        ('ML', "Machine learning"),
-        ('WC', "Web Crawling")
+        ('파이썬', 'Python'),
+        ('웹 개발', "Web Development"),
+        ('자동화 및 스크립팅', "Automation and Scripting"),
+        ('크롤링', "Web Crawling"),
+        ('데이터 분석', "Data Analysis"),
+        ('시각화', 'Visualization'),
+        ('머신러닝', "Machine learning"),
+        ('잡담', 'anything')
+        
     ]
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author_question')
-    category = models.CharField(max_length = 2, choices = CATEGORY_CHOICES, default = 'FL')
+    category = models.CharField(max_length = 50, choices = CATEGORY_CHOICES, default = '웹 개발')
     subject = models.CharField(max_length = 200)
     content = models.TextField()
     create_date = models.DateTimeField()

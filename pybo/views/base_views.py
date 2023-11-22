@@ -13,6 +13,9 @@ def index(request):
     kw = request.GET.get('kw','')#검색어
     category = request.GET.get('category', '')
 
+    if category:
+        question_list = question_list.filter(category=category)
+
     if kw:
         question_list = question_list.filter(
             Q(subject__icontains=kw) |  # 제목 검색
@@ -23,8 +26,7 @@ def index(request):
         ).distinct()
     paginator = Paginator(question_list, 10)
 
-    if category:
-        question_list = question_list.filter(category=category)
+    
     
     
     try:
