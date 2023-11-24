@@ -166,7 +166,7 @@ LOGGING = {
             'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
         },
     },
-    'handler':{
+    'handlers':{
         'console':{
             'level':'INFO',
             'filters':['require_debug_true'],
