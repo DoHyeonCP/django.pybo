@@ -2,9 +2,12 @@ from ..models import Question
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render
 from django.db.models import Q
+import logging
+logger = logging.getLogger('pybo')
 
 # Create your views here.
 def index(request):
+    logger.info("INFO 레벨로 출력")
     """
     pybo 목록출력
     """
@@ -25,9 +28,6 @@ def index(request):
             Q(answer__author__username__icontains=kw)  # 답변 글쓴이 검색
         ).distinct()
     paginator = Paginator(question_list, 10)
-
-    
-    
     
     try:
         page_obj = paginator.page(page)
