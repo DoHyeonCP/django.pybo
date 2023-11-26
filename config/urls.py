@@ -24,3 +24,6 @@ urlpatterns = [
     path('', include('pybo.urls')),
     path("accounts/", include('accounts.urls')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
+handler404 = 'accounts.views.page_not_found'
+

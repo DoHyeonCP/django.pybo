@@ -43,3 +43,9 @@ def user_profile(request, username):
         'form': form,
     }
     return render(request, 'accounts/user_profile.html', context)
+
+def page_not_found(request, exception):
+     """
+     404 Page not found
+     """
+     return render(request, 'accounts/404.html', {})
