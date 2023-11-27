@@ -8,7 +8,7 @@ services:
       - .:/
       - static_volume:/static
     ports:
-      - "8000"
+      - "8000:8000"
     environment:
       - DJANGO_SETTINGS_MODULE=config.settings.prod
   nginx:
@@ -19,3 +19,6 @@ services:
       - ./nginx:/etc/nginx/conf.d
     depends_on:
       - web
+    
+volumes:
+  static_volume:
