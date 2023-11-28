@@ -1,6 +1,6 @@
-.idea
-db.sqlite3
-*.pyc
-__pycache__
-logs
+pyko/.idea
+pyko/db.sqlite3
+pyko/*.pyc
+pyko/__pycache__
+pyko/logs
 pyko_venv/
