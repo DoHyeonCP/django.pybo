@@ -8,8 +8,8 @@ services:
     volumes:
       - ./pyko:/pyko
       - ./pyko/logs:/pyko/logs
-      - static_volume:/pyko/static
-      - media_volume:/pyko/media
+      - static_volume:/home/ubuntu/projects/pyko/pyko/static
+      - media_volume:/home/ubuntu/projects/pyko/pyko/media
     ports:
       - "8000:8000"
     environment:
@@ -22,8 +22,8 @@ services:
     ports:
       - "80:80"
     volumes:
-      - static_volume:/pyko/static
-      - media_volume:/pyko/media
+      - /home/ubuntu/projects/pyko/pyko/static:/static
+      - /home/ubuntu/projects/pyko/pyko/media:/media
     depends_on:
       - pyko
 
