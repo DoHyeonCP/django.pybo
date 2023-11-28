@@ -4,7 +4,7 @@ FROM python:3.10.12
 RUN apt-get update
 
 # 작업 디렉토리 설정
-WORKDIR /config
+WORKDIR /usr/src/app
 
 # 종속성 파일 복사
 COPY requirements.txt ./
