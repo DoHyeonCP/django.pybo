@@ -14,8 +14,8 @@ services:
       - DJANGO_SETTINGS_MODULE=config.settings.prod
 
   nginx:
-    build: ./nginx/
-    image: nginx:1.18.0
+    build: ./nginx
+    image: nginx:latest
     ports:
       - "80:80"
     volumes:
