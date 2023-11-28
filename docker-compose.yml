@@ -5,8 +5,13 @@ services:
     build: ./pyko
     command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
     volumes:
+<<<<<<< HEAD
       - static_volume:/home/projects/pyko/static
       - media_volume:/home/projects/pyko/media
+=======
+      - .:/usr/src/app
+      - static_volume:/static
+>>>>>>> ce29dfe (머지 전)
     ports:
       - "8000:8000"
     environment:
@@ -22,6 +27,10 @@ services:
       - media_volume:/home/projects/pyko/media
     depends_on:
       - web
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER = postgres
     
 volumes:
   static_volume:
