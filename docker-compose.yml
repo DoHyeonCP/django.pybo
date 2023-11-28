@@ -19,6 +19,7 @@ services:
     ports:
       - "80:80"
     volumes:
+      - /nginx:/nginx
       - static_volume:/home/projects/pyko/pyko/static
       - media_volume:/home/projects/pyko/pyko/media
     depends_on:
