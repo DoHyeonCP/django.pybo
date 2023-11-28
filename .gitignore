@@ -4,3 +4,4 @@ pyko/*.pyc
 pyko/__pycache__
 pyko/logs
 pyko_venv/
+venv
