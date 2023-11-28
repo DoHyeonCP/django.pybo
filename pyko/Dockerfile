@@ -9,6 +9,7 @@ RUN apt-get update
 # 작업 디렉토리 설정
 WORKDIR /pyko
 COPY . /pyko/
+RUN mkdir -p /pyko/logs
 
 RUN pip install --upgrade pip
 COPY ./requirements.txt  /pyko/
