@@ -1,7 +1,7 @@
 from .base import *
 
 ALLOWED_HOSTS = ['*']
-STATIC_ROOT = BASE_DIR / 'static/'
+STATIC_ROOT = '/pyko/static/'
 STATICFILES_DIRS = []
 
 DEBUG = False
