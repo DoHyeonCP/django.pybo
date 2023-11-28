@@ -8,8 +8,8 @@ services:
     volumes:
       - ./pyko:/pyko
       - ./pyko/logs:/pyko/logs
-      - static_volume:/home/projects/pyko/static
-      - media_volume:/home/projects/pyko/media
+      - static_volume:/home/projects/pyko/pyko/static
+      - media_volume:/home/projects/pyko/pyko/media
     ports:
       - "8000:8000"
     environment:
