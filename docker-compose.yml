@@ -22,8 +22,8 @@ services:
     ports:
       - "80:80"
     volumes:
-      - /home/ubuntu/projects/pyko/pyko/static:/static
-      - /home/ubuntu/projects/pyko/pyko/media:/media
+      - /home/ubuntu/projects/pyko/pyko/static:pyko/static
+      - /home/ubuntu/projects/pyko/pyko/media:pyko/media
     depends_on:
       - pyko
 
