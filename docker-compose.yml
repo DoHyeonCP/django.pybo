@@ -8,10 +8,8 @@ services:
     volumes:
       - ./pyko:/pyko
       - ./pyko/logs:/pyko/logs
-      - ./pyko/static:/pyko/static
-      - ./pyko/media:/pyko/media
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"
     environment:
       - DJANGO_SETTINGS_MODULE=config.settings.prod
 
@@ -21,8 +19,5 @@ services:
     image: nginx:1.18.0
     ports:
       - "80:80"
-    volumes:
-      - ./pyko/static:/pyko/static
-      - ./pyko/media:/pyko/media
     depends_on:
       - pyko
