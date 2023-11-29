@@ -1,8 +1,10 @@
-version: '3'
+version: '3.8'
 
 services:
   pyko:
-    build: ./pyko
+    build:
+      context: .
+      dockerfile: Dockerfile
     restart: always
     command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
     volumes:
@@ -17,6 +19,9 @@ services:
     build: ./nginx
     restart: always
     image: nginx:1.18.0
+    volumes:
+      - ./pyko/static:/pyko/static
+      - ./pyko/media:/pyko/media
     ports:
       - "80:80"
     depends_on:
