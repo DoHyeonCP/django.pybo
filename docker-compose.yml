@@ -8,6 +8,8 @@ services:
     volumes:
       - ./pyko:/pyko
       - ./pyko/logs:/pyko/logs
+    ports:
+      - "8000:8000"
     expose:
       - "8000"
     environment:
