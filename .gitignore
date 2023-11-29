@@ -5,3 +5,5 @@ pyko/__pycache__
 pyko/logs
 pyko_venv/
 venv
+ec2_github_actions
+ec2_github_actions.pub
